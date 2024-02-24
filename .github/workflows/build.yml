@@ -72,14 +72,14 @@ jobs:
         if: contains(matrix.arch, 'android')
         id: setup-ndk
         with:
-          ndk-version: r26b
+          ndk-version: r26c
           add-to-path: false
 
-      # https://github.com/microsoft/vcpkg/issues/31332
-      - name: Fix Android LDFLAGS error
-        if: contains(matrix.arch, 'android')
-        run: |
-          git -C vcpkg apply ../vcpkg-overlay/scripts/remove_avoid-version.patch
+      #   # https://github.com/microsoft/vcpkg/issues/31332
+      #   - name: Fix Android LDFLAGS error
+      #     if: contains(matrix.arch, 'android')
+      #     run: |
+      #       git -C vcpkg apply ../vcpkg-overlay/scripts/remove_avoid-version.patch
 
       - name: Install Packages on MacOS
         if: runner.os == 'macOS'
