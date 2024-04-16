@@ -32,8 +32,6 @@
     "boost-dll",
     "boost-process",
     "boost-url",
-    "boost-uuid",
-    "grpc",
-    "protobuf"
+    "boost-uuid"
   ]
 }
