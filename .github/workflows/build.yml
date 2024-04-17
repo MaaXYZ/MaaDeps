@@ -72,7 +72,7 @@ jobs:
         if: contains(matrix.arch, 'android')
         id: setup-ndk
         with:
-          ndk-version: r26c
+          ndk-version: r26d
           add-to-path: false
 
       #   # https://github.com/microsoft/vcpkg/issues/31332
