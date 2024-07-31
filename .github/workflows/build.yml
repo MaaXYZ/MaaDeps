@@ -75,12 +75,6 @@ jobs:
           ndk-version: r27
           add-to-path: false
 
-      #   # https://github.com/microsoft/vcpkg/issues/31332
-      #   - name: Fix Android LDFLAGS error
-      #     if: contains(matrix.arch, 'android')
-      #     run: |
-      #       git -C vcpkg apply ../vcpkg-overlay/scripts/remove_avoid-version.patch
-
       - name: Install Packages on MacOS
         if: runner.os == 'macOS'
         run: |
