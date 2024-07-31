@@ -1,9 +1,9 @@
 {
   "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
   "name": "maa-meta",
-  "version": "2023-04-23",
-  "description": "meta manifest that tracks dependencies for MAA",
-  "homepage": "https://github.com/MaaAssistantArknights/MaaDeps",
+  "version": "2024-07-31",
+  "description": "meta manifest that tracks dependencies for MaaFramework",
+  "homepage": "https://github.com/MaaXYZ/MaaDeps",
   "license": null,
   "dependencies": [
     {
@@ -19,19 +19,10 @@
     },
     "maa-fastdeploy",
     "zlib",
-    {
-      "name": "range-v3",
-      "platform": "osx | android"
-    },
-    "cpr",
-    "ms-gsl",
-    "thrift",
     "boost-asio",
-    "boost-beast",
     "boost-core",
     "boost-dll",
     "boost-process",
-    "boost-url",
     "boost-uuid"
   ]
 }
