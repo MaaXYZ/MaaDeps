@@ -68,6 +68,12 @@ jobs:
         run: |
           sudo apt install crossbuild-essential-arm64
 
+      - name: Install Packages on Android
+        if: contains(matrix.arch, 'android')
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y cmake
+
       - uses: nttld/setup-ndk@v1
         if: contains(matrix.arch, 'android')
         id: setup-ndk
