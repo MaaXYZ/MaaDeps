@@ -19,13 +19,7 @@ jobs:
           - os: ubuntu
             arch: arm64-android
           - os: ubuntu
-            arch: arm-android
-          - os: ubuntu
-            arch: arm-neon-android
-        # clang-17: error: unsupported argument 'i686' to option '-march='
-        # https://github.com/MaaAssistantArknights/MaaDeps/actions/runs/7285060481/job/19851366697
-        #   - os: ubuntu
-        #     arch: x64-android
+            arch: x64-android
       fail-fast: false
     defaults:
       run:
@@ -74,6 +68,15 @@ jobs:
         with:
           ndk-version: r27
           add-to-path: false
+
+      # https://github.com/android/ndk/issues/2032#issuecomment-2274923977
+      - name: Fix ndk r27
+        if: contains(matrix.arch, 'android')
+        run: |
+          FLAGS_PATH=${{ steps.setup-ndk.outputs.ndk-path }}/build/cmake/flags.cmake
+          FLAGS_CONTENT=$(cat $FLAGS_PATH)
+          echo -e "cmake_policy(PUSH)\ncmake_policy(SET CMP0057 NEW)\n\n${FLAGS_CONTENT}\n\ncmake_policy(POP)\n" > $FLAGS_PATH
+          cat $FLAGS_PATH
 
       - name: Install Packages on MacOS
         if: runner.os == 'macOS'
