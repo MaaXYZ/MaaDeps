@@ -87,8 +87,7 @@ def sdk_tarball():
         sdk_filter = None
     with tarfile.TarFile.open(f"tarball/MaaDeps-{tarball_triplet}-devel.tar.xz", 'w:xz') as sdktar:
         sdktar.add(f"./vcpkg/installed/{vcpkg.triplet}", filter=sdk_filter)
-        if 'android' not in session.target:
-            sdktar.add(f"./vcpkg/installed/{vcpkg.triplet.removeprefix('maa-').replace('arm64', 'x64')}/tools")
+        # sdktar.add(f"./vcpkg/installed/{vcpkg.triplet.removeprefix('maa-').replace('arm64', 'x64')}/tools")
 
         for f in extra_files:
             sdktar.add(f)
