@@ -7,16 +7,11 @@ endif()
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO microsoft/onnxruntime
-    REF v1.16.0
-    SHA512 ff448f7bcd0d91f129ff7d5bf54ab0ed8f4aed79c79a6e52043138d5cba180099fce5aaf00e7f959e2b3e9a3376bf4ec933428c076b097a2e4a96e1adfd9b05f
+    REF v1.18.0
+    SHA512 2e1d724eda5635fc24f93966412c197c82ee933aaea4f4ce907b5f2ee7730c1e741f2ef4d50a2d54284fc7bd05bf104bd3c56fd4466525fcd70e63c07fbb2b16
     PATCHES
         0000-system-lib-fix.patch
-        0001-suppress-depracation-warnings.patch
-        0002-pkgconfig-prefix.patch
-        0003-cmake-typo.patch
-        0004-flatbuffers-includes.patch
-        0005-disable-onnxruntime_mlas_q4dq.patch
-        0006-typo-install-to-bin.patch
+        0001-coreml-proto.patch
 )
 
 vcpkg_find_acquire_program(PYTHON3)
@@ -26,6 +21,14 @@ vcpkg_execute_build_process(
     WORKING_DIRECTORY "${SOURCE_PATH}/onnxruntime/core/flatbuffers/schema"
     LOGNAME LOGNAME "flatbuffers-compile-${TARGET_TRIPLET}"
 )
+
+set(PLATFORM_OPTIONS )
+
+if(VCPKG_TARGET_IS_WINDOWS)
+    set(PLATFORM_OPTIONS ${PLATFORM_OPTIONS} "-Donnxruntime_USE_DML=ON")
+elseif(VCPKG_TARGET_IS_OSX)
+    # set(PLATFORM_OPTIONS ${PLATFORM_OPTIONS} "-Donnxruntime_USE_COREML=ON")
+endif()
 
 vcpkg_cmake_configure(
     SOURCE_PATH "${SOURCE_PATH}/cmake"
@@ -37,10 +40,13 @@ vcpkg_cmake_configure(
     "-Donnxruntime_USE_PREINSTALLED_EIGEN=ON"
     "-DFLATBUFFERS_BUILD_FLATC=OFF"
     "-DCMAKE_INSTALL_INCLUDEDIR=include"
+    ${PLATFORM_OPTIONS}
     OPTIONS_RELEASE
     "-Donnxruntime_ENABLE_LTO=ON"
 )
 vcpkg_cmake_install()
+vcpkg_cmake_config_fixup(PACKAGE_NAME onnxruntime CONFIG_PATH lib/cmake/onnxruntime)
+vcpkg_fixup_pkgconfig()
 vcpkg_copy_pdbs()
 
 file(INSTALL "${SOURCE_PATH}/LICENSE" DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}" RENAME copyright)
