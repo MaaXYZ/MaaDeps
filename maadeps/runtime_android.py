@@ -53,7 +53,7 @@ def install_runtime(target, debug):
 
     print("Installing libc++_shared.so for Android")
     android_ndk = os.environ.get("ANDROID_NDK_HOME", "/opt/android-ndk")
-    # if windows:
+
     if sys.platform == "win32" or sys.platform == "cygwin":
         host = "windows-x86_64"
     elif sys.platform == "linux":
@@ -61,10 +61,10 @@ def install_runtime(target, debug):
     elif sys.platform == "darwin":
         host = "darwin-x86_64"
 
-    if "arm" in triplet:
-        runtime = "arm-linux-androideabi"
-    elif "arm64" in triplet:
+    if "arm64" in triplet:
         runtime = "aarch64-linux-android"
+    elif "arm" in triplet:
+        runtime = "arm-linux-androideabi"
     elif "x64" in triplet:
         runtime = "x86_64-linux-android"
 
