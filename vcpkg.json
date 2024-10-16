@@ -23,7 +23,6 @@
     "boost-core",
     "boost-dll",
     "boost-process",
-    "boost-uuid",
-    "boost-beast"
+    "boost-uuid"
   ]
 }
