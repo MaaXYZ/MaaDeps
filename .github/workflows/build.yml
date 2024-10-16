@@ -45,11 +45,11 @@ jobs:
         with:
           minimum-size: 16GB
           maximum-size: 16GB
-          disk-root: 'D:'
+          disk-root: "D:"
 
       - uses: actions/checkout@v3
         with:
-          submodules: 'recursive'
+          submodules: "recursive"
 
       - name: Install Packages on Linux
         if: runner.os == 'Linux'
@@ -88,8 +88,8 @@ jobs:
           echo "$(brew --prefix)/opt/gnu-sed/libexec/gnubin" >> $GITHUB_PATH
           echo "$(brew --prefix)/opt/gnu-tar/libexec/gnubin" >> $GITHUB_PATH
 
-          brew unlink python
-          brew link --overwrite python
+        #   brew unlink python
+        #   brew link --overwrite python
 
       - uses: actions/cache@v3
         with:
