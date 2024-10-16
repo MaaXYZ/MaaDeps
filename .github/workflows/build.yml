@@ -84,9 +84,9 @@ jobs:
           brew update
           brew install ccache ninja pkg-config nasm bison
 
-          brew install bash gsed gnu-tar
-          echo "$(brew --prefix)/opt/gsed/libexec/gnubin" >> $GITHUB_PATH
-          echo "$(brew --prefix)/opt/gsed/libexec/gnubin" >> $GITHUB_PATH
+          brew install bash gnu-sed gnu-tar
+          echo "$(brew --prefix)/opt/gnu-sed/libexec/gnubin" >> $GITHUB_PATH
+          echo "$(brew --prefix)/opt/gnu-tar/libexec/gnubin" >> $GITHUB_PATH
 
         #   brew unlink python
         #   brew link --overwrite python
