@@ -62,6 +62,11 @@ jobs:
         run: |
           sudo apt install crossbuild-essential-arm64
 
+      - uses: Jimver/cuda-toolkit@v0.2.18
+        if: runner.os == 'Linux' || runner.os == 'Windows'
+        id: cuda-toolkit
+            
+    
       - uses: nttld/setup-ndk@v1
         if: contains(matrix.arch, 'android')
         id: setup-ndk
@@ -160,6 +165,7 @@ jobs:
       - name: Build MaaDeps
         env:
           ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
+          CUDAToolkit_ROOT: ${{ steps.cuda-toolkit.outputs.CUDA_PATH }}
         run: |
           for attempt in 1 2 3
           do
