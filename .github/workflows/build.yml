@@ -68,18 +68,6 @@ jobs:
         with:
           submodules: "recursive"
 
-      - name: Set target
-        run: |
-          lower() { printf '%s\n' "${1,,}"; }
-
-          if [[ "${{matrix.arch}}" == *"android"* ]]; then
-            echo "TARGET=${{ matrix.arch }}" >> $GITHUB_ENV
-          else
-            export RUNNER_OS=$(lower ${{runner.os}})
-            export OS=$(echo $RUNNER_OS | sed 's/macOS/osx/I')
-            echo "TARGET=${{ matrix.arch }}-${OS}" >> $GITHUB_ENV
-          fi
-
       - name: Install Packages on Linux
         if: runner.os == 'Linux'
         run: |
@@ -95,7 +83,7 @@ jobs:
         if: (runner.os == 'Linux' || runner.os == 'Windows') && (!contains(matrix.arch, 'android'))
         id: cuda-toolkit
         with:
-          log-file-suffix: '${{ env.TARGET }}.txt'
+          log-file-suffix: '${{ matrix.arch }}-$(lower ${{runner.os}}).txt'
             
     
       - uses: nttld/setup-ndk@v1
@@ -175,6 +163,18 @@ jobs:
       #   shell: cmd
       #   run: |
       #     compact /c /q vcpkg
+
+      - name: Set target
+        run: |
+          lower() { printf '%s\n' "${1,,}"; }
+
+          if [[ "${{matrix.arch}}" == *"android"* ]]; then
+            echo "TARGET=${{ matrix.arch }}" >> $GITHUB_ENV
+          else
+            export RUNNER_OS=$(lower ${{runner.os}})
+            export OS=$(echo $RUNNER_OS | sed 's/macOS/osx/I')
+            echo "TARGET=${{ matrix.arch }}-${OS}" >> $GITHUB_ENV
+          fi
 
       - name: Set OBJCOPY for arm64-linux
         if: matrix.arch == 'arm64' && matrix.os == 'ubuntu'
