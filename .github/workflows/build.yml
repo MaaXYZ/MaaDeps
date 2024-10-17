@@ -46,8 +46,9 @@ jobs:
           minimum-size: 16GB
           maximum-size: 16GB
           disk-root: "D:"
-          
-      - name: Free Disk Space (Ubuntu)
+
+      - name: Free Disk Space (Ubuntu) for cuda
+        if: (runner.os == 'Linux') && (!contains(matrix.arch, 'android'))
         uses: jlumbroso/free-disk-space@main
         with:
           # this might remove tools that are actually needed,
