@@ -25,9 +25,9 @@ vcpkg_execute_build_process(
 set(PLATFORM_OPTIONS )
 
 if(VCPKG_TARGET_IS_WINDOWS)
-    set(PLATFORM_OPTIONS ${PLATFORM_OPTIONS} "-Donnxruntime_USE_DML=ON" "-Donnxruntime_USE_CUDA=ON")
+    set(PLATFORM_OPTIONS ${PLATFORM_OPTIONS} "-Donnxruntime_USE_DML=ON" "-Donnxruntime_USE_CUDA=ON" "-Donnxruntime_CUDA_MINIMAL=ON")
 elseif(VCPGK_TARGET_IS_LINUX)
-    set(PLATFORM_OPTIONS ${PLATFORM_OPTIONS} "-Donnxruntime_USE_CUDA=ON")
+    set(PLATFORM_OPTIONS ${PLATFORM_OPTIONS} "-Donnxruntime_USE_CUDA=ON" "-Donnxruntime_CUDA_MINIMAL=ON")
 elseif(VCPKG_TARGET_IS_OSX)
     set(PLATFORM_OPTIONS ${PLATFORM_OPTIONS} "-Donnxruntime_USE_COREML=ON")
 endif()
