@@ -83,7 +83,7 @@ jobs:
         if: (runner.os == 'Linux' || runner.os == 'Windows') && (!contains(matrix.arch, 'android'))
         id: cuda-toolkit
         with:
-          log-file-suffix: '${{ matrix.arch }}-$(lower ${{runner.os}}).txt'
+          log-file-suffix: '${{ matrix.arch }}-${{runner.os}}.txt'
             
     
       - uses: nttld/setup-ndk@v1
