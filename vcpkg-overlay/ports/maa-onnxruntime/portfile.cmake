@@ -25,7 +25,7 @@ vcpkg_execute_build_process(
 set(PLATFORM_OPTIONS )
 
 if(VCPKG_TARGET_IS_WINDOWS)
-    set(PLATFORM_OPTIONS ${PLATFORM_OPTIONS} "-Donnxruntime_USE_DML=ON" "-Donnxruntime_USE_CUDA=ON" "-Donnxruntime_NVCC_THREADS=0")
+    set(PLATFORM_OPTIONS ${PLATFORM_OPTIONS} "-Donnxruntime_USE_DML=ON" "-Donnxruntime_USE_CUDA=ON" "-Donnxruntime_NVCC_THREADS=1")
 elseif(VCPGK_TARGET_IS_LINUX)
     set(PLATFORM_OPTIONS ${PLATFORM_OPTIONS} "-Donnxruntime_USE_CUDA=ON")
 elseif(VCPKG_TARGET_IS_OSX)
