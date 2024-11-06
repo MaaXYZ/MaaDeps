@@ -114,8 +114,6 @@ vcpkg_cmake_configure(
         Python_EXECUTABLE
         ORT_GIT_COMMIT
         ORT_GIT_BRANCH
-    FIX_MAADEPS_BUILID_ERROR
-        -mmacosx-version-min=13.3
 )
 
 if("cuda" IN_LIST FEATURES)
