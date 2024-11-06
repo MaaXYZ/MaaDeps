@@ -7,6 +7,7 @@ vcpkg_from_github(
     REF ${ORT_BRANCH}
     SHA512 3bf25e431d175c61953d28b1bf8f6871376684263992451a5b2a66e670768fc66e7027f141c6e3f4d1eddeebeda51f31ea0adf4749e50d99ee89d0a26bec77ce
     PATCHES
+        0000-system-lib-fix.patch
         revert-pr-21492.patch
         fix-pr-21348.patch # cmake, source changes of PR 21348
         fix-cmake.patch
