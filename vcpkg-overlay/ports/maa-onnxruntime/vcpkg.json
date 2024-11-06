@@ -75,17 +75,15 @@
         "nvidia-cutlass"
       ]
     },
-    "tensorrt": {
-      "description": "Build with TensorRT support",
+    "directml": {
+      "description": "Build with DirectML support",
       "dependencies": [
-        {
-          "name": "onnxruntime",
-          "default-features": false,
-          "features": [
-            "cuda"
-          ]
-        }
+        "directml-bin",
+        "directx-headers"
       ]
+    },
+    "coreml": {
+      "description": "Build with CoreML support"
     }
   }
 }

@@ -8,6 +8,7 @@ vcpkg_from_github(
     SHA512 3bf25e431d175c61953d28b1bf8f6871376684263992451a5b2a66e670768fc66e7027f141c6e3f4d1eddeebeda51f31ea0adf4749e50d99ee89d0a26bec77ce
     PATCHES
         0000-system-lib-fix.patch
+        0001-coremltools.patch
         revert-pr-21492.patch
         fix-pr-21348.patch # cmake, source changes of PR 21348
         fix-cmake.patch
@@ -74,6 +75,19 @@ if("tensorrt" IN_LIST FEATURES)
         message(STATUS "Using TensorRT: ${TENSORRT_ROOT}")
         list(APPEND FEATURE_OPTIONS "-Donnxruntime_TENSORRT_HOME:PATH=${TENSORRT_ROOT}")
     endif()
+endif()
+
+if("coreml" IN_LIST FEATURES)
+    if(NOT DEFINED COREMLTOOLS_ROOT)
+        vcpkg_from_github(
+            OUT_SOURCE_PATH COREMLTOOLS_ROOT
+            REPO apple/coremltools
+            REF 8.0
+            SHA512 ed1c5140d8b613632dcc408b789176ec95c11e3e1a504df92d1f7930e79e6eb9de8a42c18cf19bb115e52d5c4c64ed22e61e6bb1e8d97ebb8291a6c1e8c42920
+        )
+    endif()
+    message(STATUS "Using CoreML: ${COREMLTOOLS_ROOT}")
+    list(APPEND FEATURE_OPTIONS "-Donnxruntime_COREMLTOOLS_HOME:PATH=${COREMLTOOLS_ROOT}")
 endif()
 
 string(COMPARE EQUAL "${VCPKG_LIBRARY_LINKAGE}" "dynamic" BUILD_SHARED)

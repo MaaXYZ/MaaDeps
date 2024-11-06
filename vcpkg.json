@@ -17,12 +17,22 @@
       "default-features": false,
       "features": ["eigen", "jpeg", "png", "tiff", "world"]
     },
-    "maa-onnxruntime",
-    "maa-fastdeploy",
     {
-      "name": "directml-bin",
-      "platform": "windows"
+      "name": "maa-onnxruntime",
+      "platform": "windows",
+      "features": ["cuda", "directml"]
     },
+    {
+      "name": "maa-onnxruntime",
+      "platform": "osx",
+      "features": ["coreml"]
+    },
+    {
+      "name": "maa-onnxruntime",
+      "platform": "linux",
+      "features": ["cuda"]
+    },
+    "maa-fastdeploy",
     "zlib",
     "boost-asio",
     "boost-core",
