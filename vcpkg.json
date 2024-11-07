@@ -20,7 +20,7 @@
     {
       "name": "maa-onnxruntime",
       "platform": "windows",
-      "features": ["cuda", "directml"]
+      "features": ["directml"]
     },
     {
       "name": "maa-onnxruntime",
@@ -29,8 +29,7 @@
     },
     {
       "name": "maa-onnxruntime",
-      "platform": "linux",
-      "features": ["cuda"]
+      "platform": "linux"
     },
     "maa-fastdeploy",
     "zlib",
