@@ -47,22 +47,22 @@ jobs:
           maximum-size: 16GB
           disk-root: "D:"
 
-      - name: Free Disk Space (Ubuntu) for cuda
-        if: (runner.os == 'Linux') && (!contains(matrix.arch, 'android'))
-        uses: jlumbroso/free-disk-space@main
-        with:
-          # this might remove tools that are actually needed,
-          # if set to "true" but frees about 6 GB
-          tool-cache: false
+      # - name: Free Disk Space (Ubuntu) for cuda
+      #   if: (runner.os == 'Linux') && (!contains(matrix.arch, 'android'))
+      #   uses: jlumbroso/free-disk-space@main
+      #   with:
+      #     # this might remove tools that are actually needed,
+      #     # if set to "true" but frees about 6 GB
+      #     tool-cache: false
           
-          # all of these default to true, but feel free to set to
-          # "false" if necessary for your workflow
-          android: true
-          dotnet: true
-          haskell: true
-          large-packages: true
-          docker-images: true
-          swap-storage: true
+      #     # all of these default to true, but feel free to set to
+      #     # "false" if necessary for your workflow
+      #     android: true
+      #     dotnet: true
+      #     haskell: true
+      #     large-packages: true
+      #     docker-images: true
+      #     swap-storage: true
 
       - uses: actions/checkout@v3
         with:
@@ -80,12 +80,11 @@ jobs:
         run: |
           sudo apt install crossbuild-essential-arm64
 
-      - uses: Jimver/cuda-toolkit@v0.2.18
-        if: (runner.os == 'Linux' || runner.os == 'Windows') && (!contains(matrix.arch, 'android'))
-        id: cuda-toolkit
-        with:
-          log-file-suffix: '${{ matrix.arch }}-${{ runner.os }}.txt'
-            
+      # - uses: Jimver/cuda-toolkit@v0.2.18
+      #   if: (runner.os == 'Linux' || runner.os == 'Windows') && (!contains(matrix.arch, 'android'))
+      #   id: cuda-toolkit
+      #   with:
+      #     log-file-suffix: '${{ matrix.arch }}-${{ runner.os }}.txt'
     
       - uses: nttld/setup-ndk@v1
         if: contains(matrix.arch, 'android')
@@ -186,7 +185,7 @@ jobs:
       - name: Build MaaDeps
         env:
           ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
-          CUDAToolkit_ROOT: ${{ steps.cuda-toolkit.outputs.CUDA_PATH }}
+          # CUDAToolkit_ROOT: ${{ steps.cuda-toolkit.outputs.CUDA_PATH }}
         run: |
           for attempt in 1 2 3
           do
