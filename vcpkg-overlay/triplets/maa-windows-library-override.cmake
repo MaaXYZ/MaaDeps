@@ -5,6 +5,10 @@ if(PORT STREQUAL "opencv4")
   set(VCPKG_CMAKE_CONFIGURE_OPTIONS ${VCPKG_CMAKE_CONFIGURE_OPTIONS} -DENABLE_LTO=ON)
 endif()
 
+if(PORT STREQUAL "maa-onnxruntime")
+    set(VCPKG_LIBRARY_LINKAGE dynamic)
+  endif()
+
 if(PORT STREQUAL "maa-fastdeploy")
   set(VCPKG_LIBRARY_LINKAGE dynamic)
 endif()
