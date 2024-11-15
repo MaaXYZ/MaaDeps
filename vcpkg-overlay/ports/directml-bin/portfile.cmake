@@ -3,7 +3,7 @@ vcpkg_check_linkage(ONLY_DYNAMIC_LIBRARY)
 vcpkg_download_distfile(ARCHIVE
     URLS "https://www.nuget.org/api/v2/package/Microsoft.AI.DirectML/${VERSION}"
     FILENAME "Microsoft.AI.DirectML.${VERSION}.nupkg"
-    SKIP_SHA512
+    SHA512 fde767f56904abc90fd53f65d8729c918ab7f6e3c5e1ecdd479908fc02b4535cf2b0860f7ab2acb9b731d6cb809b72c3d5d4d02853fb8f5ea022a47bc44ef285
 )
 
 vcpkg_extract_source_archive(

@@ -2,14 +2,13 @@
 
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
-    REPO boostorg/asio
+    REPO boostorg/process
     REF boost-${VERSION}
-    SHA512 379905acf0cc0352c8df32f4106c3e17ad0f02fd0367288c2dca319a7573bd34ebf435a0e9d876ee0d44a24189d896167c49c7727e1dc77c0fca887e9f7a6eca
+    SHA512 f8a5d146d07aad83a2aff1e565026836c833b77daa9697f7680956423e7d8b450b41831c77047afff1e9f716c87d2f9ade6194c21e80cfec33d686a608241c32
     HEAD_REF master
     PATCHES
-        opt-dep.diff
-        windows_alloca_header.patch
-        windows_handle_inheritance.patch
+        opt-filesystem.patch
+        
 )
 
 set(FEATURE_OPTIONS "")
