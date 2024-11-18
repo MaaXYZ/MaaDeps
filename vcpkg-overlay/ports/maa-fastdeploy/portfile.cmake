@@ -1,8 +1,8 @@
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
-    REPO MaaAssistantArknights/FastDeploy
-    REF 2896b6d3641c18218209c496ea149a773373fa8b
-    SHA512 2d8a9072763b9ccf7968dd43aa0077fcf45659caa1f90db7af6b1cbf7a74872729625a74faefee09b655ff9ec17fe9f589935335f3c393412e9e9b93feef8a1f
+    REPO MaaXYZ/FastDeploy
+    REF 1ee2cf3f66aaed77b8a3499358cd51988d8ed75b
+    SHA512 691143223e41049a2e5a86f624175d187a60fa46d8ab42efb3c38239eb7239026f2ef8b268d7ed8383de9bca6aa81726cd595a4671a4dab80f28879e0fdb9f1a
 )
 
 vcpkg_cmake_configure(
