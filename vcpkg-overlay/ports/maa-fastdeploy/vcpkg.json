@@ -1,7 +1,7 @@
 {
   "name": "maa-fastdeploy",
   "version": "1.0.7",
-  "port-version": 3,
+  "port-version": 4,
   "homepage": "https://github.com/PaddlePaddle/FastDeploy",
   "license": "Apache-2.0",
   "supports": "!uwp",
