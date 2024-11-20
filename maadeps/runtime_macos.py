@@ -2,6 +2,7 @@ from pathlib import Path
 import subprocess
 
 exclude = [
+    "*onnxruntime_providers_shared*",
     "*opencv_img_hash*",
 ]
 

@@ -5,6 +5,7 @@ import shutil
 from .common import resdir
 
 exclude = [
+    "*onnxruntime_providers_shared*",
     "*opencv_img_hash*",
 ]
 

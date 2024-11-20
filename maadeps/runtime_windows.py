@@ -3,6 +3,7 @@ from pathlib import Path
 
 
 exclude = [
+    "bin/onnxruntime_providers_shared_maa.dll",
     "bin/opencv_img_hash*_maa.dll",
     "*.pdb",
     # mingw gcc-libs
