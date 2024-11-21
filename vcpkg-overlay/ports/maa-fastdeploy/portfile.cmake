@@ -1,8 +1,8 @@
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO MaaXYZ/FastDeploy
-    HEAD_REF dev
-    SHA512 cd34fbfbbce0f2aa17c466477df5a7928e12b6b6cd0d0edd9915c080bfd739a4f62c70f7e11cd4220aff7492e6383699541c05d4e45212753fee30155a3877a0
+    REF e2e979b458cf3de71d5a6250bc5d15d630c9916a
+    SHA512 10db1c4598bdefb3736b41518ded2cf3a4f7c8ae9f586d43465e555cf545571b59acf703e4fb7c331c228a9dfb3ae86bf9c1c11d58bd22cd9dc32e66b3ed9477
 )
 
 vcpkg_cmake_configure(
