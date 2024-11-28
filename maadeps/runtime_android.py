@@ -8,6 +8,7 @@ from . import runtime_linux as linux
 from .vcpkg import triplet
 
 exclude = [
+    "*onnxruntime_providers_shared*",
     "*opencv_img_hash*",
 ]
 
