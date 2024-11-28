@@ -85,6 +85,18 @@
     },
     "coreml": {
       "description": "Build with CoreML support"
+    },
+    "tensorrt": {
+      "description": "Build with TensorRT support",
+      "dependencies": [
+        {
+          "name": "onnxruntime",
+          "default-features": false,
+          "features": [
+            "cuda"
+          ]
+        }
+      ]
     }
   }
 }
