@@ -82,8 +82,8 @@ if("coreml" IN_LIST FEATURES)
         vcpkg_from_github(
             OUT_SOURCE_PATH COREMLTOOLS_ROOT
             REPO apple/coremltools
-            REF 8.0
-            SHA512 ed1c5140d8b613632dcc408b789176ec95c11e3e1a504df92d1f7930e79e6eb9de8a42c18cf19bb115e52d5c4c64ed22e61e6bb1e8d97ebb8291a6c1e8c42920
+            REF 8.1
+            SHA512 666f93eb29abdebba93e686486f4cd92f8e9e1a07e835b8e6cb652e6d0ba3ab2bd62d8743e7b121375abcb5f26939c0ac57f0262c28ac3b3aa8c17b75b93fbfd
         )
     endif()
     message(STATUS "Using CoreML: ${COREMLTOOLS_ROOT}")
