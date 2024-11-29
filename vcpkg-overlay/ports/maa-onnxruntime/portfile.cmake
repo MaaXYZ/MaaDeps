@@ -121,7 +121,7 @@ vcpkg_cmake_configure(
     OPTIONS_DEBUG
         -Donnxruntime_ENABLE_MEMLEAK_CHECKER=OFF
         -Donnxruntime_ENABLE_MEMORY_PROFILE=OFF
-        -Donnxruntime_DEBUG_NODE_INPUTS_OUTPUTS=1
+        -Donnxruntime_DEBUG_NODE_INPUTS_OUTPUTS=OFF
     MAYBE_UNUSED_VARIABLES
         onnxruntime_BUILD_WEBASSEMBLY
         onnxruntime_TENSORRT_PLACEHOLDER_BUILDER
