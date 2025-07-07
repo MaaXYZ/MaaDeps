@@ -70,10 +70,17 @@ jobs:
           sudo apt-get install -y ninja-build python3-pyelftools elfutils patchelf nasm
           sudo apt-get install -y autoconf automake autoconf-archive
 
-      - name: Install Cross-Compiler for Linux
-        if: runner.os == 'Linux' && matrix.arch == 'arm64'
+      # - name: Install Cross-Compiler for Linux
+      #   if: runner.os == 'Linux' && matrix.arch == 'arm64'
+      #   run: |
+      #     sudo apt install crossbuild-essential-arm64
+
+      - name: Fetch toolchains
+        if: runner.os == 'Linux'
         run: |
-          sudo apt install crossbuild-essential-arm64
+          python3 linux-toolchain-download.py ${{ matrix.arch }}
+          # temp fix exec perm
+          chmod -R +x x-tools
 
       # - uses: Jimver/cuda-toolkit@v0.2.18
       #   if: (runner.os == 'Linux' || runner.os == 'Windows') && (!contains(matrix.arch, 'android'))
@@ -172,10 +179,11 @@ jobs:
             echo "TARGET=${{ matrix.arch }}-${OS}" >> $GITHUB_ENV
           fi
 
-      - name: Set OBJCOPY for arm64-linux
-        if: matrix.arch == 'arm64' && matrix.os == 'ubuntu'
+      - name: Set OBJCOPY
+        if: matrix.os == 'ubuntu'
         run: |
-          echo "OBJCOPY=aarch64-linux-gnu-objcopy" >> $GITHUB_ENV
+          ARCH=${{ matrix.arch == 'x64' && 'x86_64' || 'aarch64' }}
+          echo "OBJCOPY=`pwd`/x-tools/$ARCH-linux-gnu/bin/$ARCH-linux-gnu-objcopy" >> $GITHUB_ENV
 
       - name: Build MaaDeps
         env:
