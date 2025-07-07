@@ -1,0 +1,10 @@
+--- a/src/liblzma/check/crc32_arm64.h
++++ b/src/liblzma/check/crc32_arm64.h
+@@ -25,6 +25,7 @@
+ #if defined(CRC32_GENERIC) && defined(CRC32_ARCH_OPTIMIZED)
+ #	if defined(HAVE_GETAUXVAL) || defined(HAVE_ELF_AUX_INFO)
+ #		include <sys/auxv.h>
++#		include <asm/hwcap.h> // fix missing HWCAP_CRC32
+ #	elif defined(_WIN32)
+ #		include <processthreadsapi.h>
+ #	elif defined(__APPLE__) && defined(HAVE_SYSCTLBYNAME)
