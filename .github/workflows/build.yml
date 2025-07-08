@@ -77,10 +77,10 @@ jobs:
 
       - name: Fetch toolchains
         if: runner.os == 'Linux'
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           python3 linux-toolchain-download.py ${{ matrix.arch }}
-          # temp fix exec perm
-          chmod -R +x x-tools
 
       # - uses: Jimver/cuda-toolkit@v0.2.18
       #   if: (runner.os == 'Linux' || runner.os == 'Windows') && (!contains(matrix.arch, 'android'))

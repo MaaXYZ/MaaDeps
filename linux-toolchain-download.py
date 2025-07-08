@@ -9,7 +9,7 @@ from pathlib import Path
 import shutil
 
 basedir = Path(__file__).parent
-maadeps_dir = Path(basedir, "x-tools")
+maadeps_dir = Path(basedir)
 download_dir = Path(maadeps_dir, "tarball")
 
 def detect_host_arch():
@@ -112,10 +112,13 @@ def main():
         req.add_header("Authorization", f"Bearer {token}")
     resp = retry_urlopen(req).read()
     release = json.loads(resp)
+
     def split_asset_name(name: str):
+        if not name.endswith('.tar.xz'):
+            return None
+        name = name.replace('.tar.xz', '')
         *remainder, architecture = name.rsplit('-', 1)
-        architecture = architecture[:-4]
-        print(name, architecture)
+        print(f'{name.ljust(29)} arch:{architecture}')
         if architecture in { 'x64', 'arm64' }:
             return architecture
         return None
@@ -134,7 +137,9 @@ def main():
             local_file = download_dir / sanitize_filename(asset["name"])
             urllib.request.urlretrieve(url, local_file, reporthook=ProgressHook())
             print("extracting", asset["name"])
+            os.system(f'rm -rf {maadeps_dir}/x-tools')
             shutil.unpack_archive(local_file, maadeps_dir)
+            os.system(f'chmod -R +w {maadeps_dir}/x-tools')
     else:
         raise Exception(f"no binary release found for {target_arch}")
 
