@@ -81,7 +81,7 @@ jobs:
       #     sudo apt install crossbuild-essential-arm64
 
       - name: Fetch toolchains
-        if: runner.os == 'Linux'
+        if: runner.os == 'Linux' && !contains(matrix.arch, 'android')
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -185,7 +185,7 @@ jobs:
           fi
 
       - name: Set OBJCOPY
-        if: matrix.os == 'ubuntu'
+        if: runner.os == 'Linux' && !contains(matrix.arch, 'android')
         run: |
           ARCH=${{ matrix.arch == 'x64' && 'x86_64' || 'aarch64' }}
           echo "OBJCOPY=`pwd`/x-tools/$ARCH-linux-gnu/bin/$ARCH-linux-gnu-objcopy" >> $GITHUB_ENV
