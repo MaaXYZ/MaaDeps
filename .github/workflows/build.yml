@@ -75,6 +75,13 @@ jobs:
           sudo apt-get install -y ninja-build python3-pyelftools elfutils patchelf nasm
           sudo apt-get install -y autoconf automake autoconf-archive
 
+      - name: Install llvm 20
+        if: runner.os == 'Linux' && !contains(matrix.arch, 'android')
+        run: |
+          wget https://apt.llvm.org/llvm.sh
+          chmod +x llvm.sh
+          sudo ./llvm.sh 20 all
+
       # - name: Install Cross-Compiler for Linux
       #   if: runner.os == 'Linux' && matrix.arch == 'arm64'
       #   run: |
