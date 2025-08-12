@@ -16,6 +16,7 @@ vcpkg_from_github(
         fix-cmake-tensorrt.patch # TENSORRT_ROOT is not defined, use CUDAToolkit to search TensorRT
         fix-llvm-rc-unicode.patch
         fix-clang-cl-simd-compile.patch
+        fix-linux-clang.patch
         include-chrono.patch
 )
 # copied from PR 21348 to reduce patch size
