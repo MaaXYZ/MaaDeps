@@ -1,5 +1,5 @@
 set(CMAKE_SYSTEM_NAME Linux)
-set(CMAKE_SYSTEM_PROCESSOR arm64)
+set(CMAKE_SYSTEM_PROCESSOR aarch64)
 
 set(XTOOLS_ROOT ${CMAKE_CURRENT_LIST_DIR}/../../x-tools/aarch64-linux-gnu)
 set(CMAKE_C_COMPILER_TARGET aarch64-linux-gnu)
