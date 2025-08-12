@@ -13,7 +13,7 @@ jobs:
   build-maadeps:
     strategy:
       matrix:
-        os: [ubuntu, windows, macos]
+        os: [ubuntu]
         arch: [x64, arm64]
         include:
           - os: ubuntu
