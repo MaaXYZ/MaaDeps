@@ -81,6 +81,7 @@ def sdk_tarball():
     if 'linux' in session.target:
         extra_files += [
             *glob.glob("./cmake/*"),
+            *glob.glob("./x-tools/*"),
             "linux-toolchain-download.py"
         ]
 
