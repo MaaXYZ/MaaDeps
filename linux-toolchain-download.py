@@ -125,7 +125,7 @@ def main():
     toolchain_asset = None
     llvm_asset = None
     for asset in release["assets"]:
-        if (asset["name"].endswith("LLVM")):
+        if (asset["name"].endswith("llvm.tar.xz")):
             llvm_asset = asset
             continue
         arch = split_asset_name(asset["name"])
