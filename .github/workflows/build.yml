@@ -120,8 +120,22 @@ jobs:
           echo "$(brew --prefix)/opt/gnu-sed/libexec/gnubin" >> $GITHUB_PATH
           echo "$(brew --prefix)/opt/gnu-tar/libexec/gnubin" >> $GITHUB_PATH
 
+          brew uninstall cmake
+
         #   brew unlink python
         #   brew link --overwrite python
+
+      - name: Install cmake on MacOS
+        if: runner.os == 'macOS'
+        run: |
+          wget https://github.com/Kitware/CMake/releases/download/v3.31.8/cmake-3.31.8-macos-universal.tar.gz
+          tar jxvf cmake-3.31.8-macos-universal.tar.gz
+          echo "PATH=`pwd`/CMake.app/Contents/bin:$PATH" >> $GITHUB_ENV
+      
+      - name: Check cmake on MacOS
+        if: runner.os == 'macOS'
+        run: |
+          cmake --version
 
       - uses: actions/cache@v3
         with:
