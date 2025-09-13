@@ -128,8 +128,8 @@ jobs:
       - name: Install cmake on MacOS
         if: runner.os == 'macOS'
         run: |
-          wget https://github.com/Kitware/CMake/releases/download/v3.31.8/cmake-3.31.8-macos-universal.tar.gz
-          tar jxvf cmake-3.31.8-macos-universal.tar.gz
+          wget -q https://github.com/Kitware/CMake/releases/download/v3.31.8/cmake-3.31.8-macos-universal.tar.gz
+          tar zxvf cmake-3.31.8-macos-universal.tar.gz
           echo "PATH=`pwd`/CMake.app/Contents/bin:$PATH" >> $GITHUB_ENV
       
       - name: Check cmake on MacOS
