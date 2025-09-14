@@ -41,6 +41,7 @@
     "cppzmq",
     {
       "name": "wayland",
+      "platform": "linux",
       "features": [
         "force-build"
       ]
