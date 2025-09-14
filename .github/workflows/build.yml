@@ -75,6 +75,12 @@ jobs:
           sudo apt-get install -y ninja-build python3-pyelftools elfutils patchelf nasm
           sudo apt-get install -y autoconf automake autoconf-archive
 
+      - name: Install wayland-scanner on Linux
+        if: runner.os == 'Linux' && !contains(matrix.arch, 'android')
+        run: |
+          sudo apt-get install -y libwayland-dev
+          wayland-scanner --version
+
       # - name: Install Cross-Compiler for Linux
       #   if: runner.os == 'Linux' && matrix.arch == 'arm64'
       #   run: |
