@@ -38,6 +38,12 @@
     "boost-dll",
     "boost-process",
     "boost-uuid",
-    "cppzmq"
+    "cppzmq",
+    {
+      "name": "wayland",
+      "features": [
+        "force-build"
+      ]
+    }
   ]
 }
