@@ -7,6 +7,13 @@
   "license": null,
   "dependencies": [
     {
+      "name": "wayland",
+      "platform": "linux",
+      "features": [
+        "force-build"
+      ]
+    },
+    {
       "name": "opencv",
       "default-features": false,
       "features": ["eigen", "jpeg", "png", "tiff", "calib3d", "world"]
@@ -38,13 +45,6 @@
     "boost-dll",
     "boost-process",
     "boost-uuid",
-    "cppzmq",
-    {
-      "name": "wayland",
-      "platform": "linux",
-      "features": [
-        "force-build"
-      ]
-    }
+    "cppzmq"
   ]
 }
