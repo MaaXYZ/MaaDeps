@@ -1,7 +1,7 @@
 #[[
 修改内容
 
-1. 指定版本为 1.20.0, 以匹配 ubuntu 22.04 系统自带的版本
+1. 更改 wayland 的版本
 2. 改为使用 GitHub 镜像源
 3. 为移动 wayland-scanner 和 aclocal 的逻辑添加判断条件 NOT VCPKG_CROSSCOMPILING
 
@@ -25,8 +25,12 @@ endif()
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO gitlab-freedesktop-mirrors/wayland
-    REF 75c1a93e2067220fa06208f20f8f096bb463ec08
-    SHA512 c0c07843db0c6bfe0475f757cc9147692338cf5e5bb7a94549399b700a5c4e72d264d2caa325a2b6590c032fd7a9e3456dfe2f2530e1988887ee69a0a62cab52
+    # ubuntu 22.04 1.20.0
+    # REF 75c1a93e2067220fa06208f20f8f096bb463ec08
+    # SHA512 c0c07843db0c6bfe0475f757cc9147692338cf5e5bb7a94549399b700a5c4e72d264d2caa325a2b6590c032fd7a9e3456dfe2f2530e1988887ee69a0a62cab52
+    # ubuntu 24.04 1.22.0
+    REF b2649cb3ee6bd70828a17e50beb16591e6066288
+    SHA512 6f2dce620bff1cd2ddd858ab1f7022d1133d9aa37c14431bdb2ab6296696c59ea6c28f40c59a8f8a92332ad03d1679a2b5854c0aaa914e9ca8db53438fddc4ea
 )
 
 if(VCPKG_CROSSCOMPILING)
