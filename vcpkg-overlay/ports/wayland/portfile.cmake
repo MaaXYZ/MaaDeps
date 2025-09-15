@@ -4,6 +4,7 @@
 1. 更改 wayland 的版本
 2. 改为使用 GitHub 镜像源
 3. 为移动 wayland-scanner 和 aclocal 的逻辑添加判断条件 NOT VCPKG_CROSSCOMPILING
+4. 手动编译了 scanner 并直接在 meson 中引用, 而非查找
 
 ]]
 
@@ -31,10 +32,12 @@ vcpkg_from_github(
     # ubuntu 24.04 1.22.0
     REF b2649cb3ee6bd70828a17e50beb16591e6066288
     SHA512 6f2dce620bff1cd2ddd858ab1f7022d1133d9aa37c14431bdb2ab6296696c59ea6c28f40c59a8f8a92332ad03d1679a2b5854c0aaa914e9ca8db53438fddc4ea
+    PATCHES
+        001-fix-scanner-path.patch
 )
 
 if(VCPKG_CROSSCOMPILING)
-    set(OPTIONS -Dscanner=false)
+    set(OPTIONS -Dscanner=false -Dscanner_path=${CMAKE_CURRENT_LIST_DIR}/wayland-scanner)
 else()
     set(OPTIONS -Dscanner=true)
 endif()
