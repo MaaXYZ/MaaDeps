@@ -45,6 +45,10 @@
     "boost-dll",
     "boost-process",
     "boost-uuid",
-    "cppzmq"
+    "cppzmq",
+    {
+      "name": "vgamepad-bin",
+      "platform": "windows"
+    }
   ]
 }
