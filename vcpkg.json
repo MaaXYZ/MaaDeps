@@ -48,7 +48,7 @@
     "cppzmq",
     {
       "name": "vgamepad-bin",
-      "platform": "windows"
+      "platform": "windows & (x64 | x86)"
     }
   ]
 }
