@@ -19,6 +19,7 @@ vcpkg_from_github(
         fix-linux-clang.patch
         include-chrono.patch
         fix-pr-25815.patch
+        fix-pr-23260.patch
 )
 # copied from PR 21348 to reduce patch size
 # caution: https://github.com/microsoft/onnxruntime/blob/45737400a2f3015c11f005ed7603611eaed306a6/cmake/deps.txt#L20-L25
