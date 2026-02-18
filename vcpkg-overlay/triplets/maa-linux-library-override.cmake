@@ -18,7 +18,3 @@ endif ()
 if (PORT STREQUAL "wayland")
   set(X_VCPKG_FORCE_VCPKG_WAYLAND_LIBRARIES ON)
 endif ()
-
-if (PORT STREQUAL "libffi")
-  set(VCPKG_LIBFFI_EXTRA_OPTION "--host=x86_64-linux-gnu")
-endif ()
