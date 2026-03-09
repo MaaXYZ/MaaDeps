@@ -50,6 +50,6 @@ def install_manifest(manifest_root, triplet=None):
     if triplet is None:
         triplet = _this_module.triplet
     cmd = [os.path.join(root, "vcpkg"), "install", "--x-install-root=" + os.path.join(root, "installed"), "--triplet", triplet]
-    # if sys.platform == "win32":
-    #     cmd.append("--clean-buildtrees-after-build")
+    if sys.platform == "win32" and os.environ.get("MAA_VCPKG_CLEAN_BUILDTREES_AFTER_BUILD") == "1":
+        cmd.append("--clean-buildtrees-after-build")
     subprocess.check_call(cmd, cwd=manifest_root)

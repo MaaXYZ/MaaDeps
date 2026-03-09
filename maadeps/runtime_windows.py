@@ -45,7 +45,13 @@ def install_runtime_prefix(prefix, target_dir, debug_dir):
                     pdbfile = pdbfile.decode('mbcs')
                 pdbfile = Path(pdbfile)
                 if pdbfile.is_relative_to(vcpkg.root):
-                    print("found pdb for", file, "->", pdbfile)
-                    install_file(pdbfile, debug_dir)
+                    if pdbfile.is_relative_to(vcpkg.root / "buildtrees"):
+                        stash_pdb = vcpkg.root / "pdbstash" / pdbfile.relative_to(vcpkg.root / "buildtrees")
+                    else:
+                        stash_pdb = vcpkg.root / "pdbstash" / pdbfile.relative_to(vcpkg.root)
+                    actual_pdb = pdbfile if pdbfile.exists() else stash_pdb
+                    if actual_pdb.exists():
+                        print("found pdb for", file, "->", actual_pdb)
+                        install_file(actual_pdb, debug_dir)
             except:
                 pass
