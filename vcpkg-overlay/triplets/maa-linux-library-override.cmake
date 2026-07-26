@@ -3,7 +3,10 @@ set(VCPKG_LIBRARY_LINKAGE static)
 
 if(PORT STREQUAL "opencv4")
   set(VCPKG_LIBRARY_LINKAGE dynamic)
-  set(VCPKG_CMAKE_CONFIGURE_OPTIONS ${VCPKG_CMAKE_CONFIGURE_OPTIONS} -DWITH_V4L=OFF)
+  # Keep the statically linked JPEG implementation private to OpenCV.
+  set(VCPKG_CMAKE_CONFIGURE_OPTIONS ${VCPKG_CMAKE_CONFIGURE_OPTIONS}
+      -DWITH_V4L=OFF
+      -DCMAKE_SHARED_LINKER_FLAGS=-Wl,--exclude-libs,libjpeg.a)
 endif()
 
 if(PORT MATCHES "onnxruntime|maa-")
