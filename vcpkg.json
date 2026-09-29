@@ -58,8 +58,9 @@
       ]
     },
     {
-      "name": "libxkbcommon",
-      "platform": "linux"
+      "name": "dbus",
+      "platform": "linux",
+      "default-features": false
     }
   ]
 }

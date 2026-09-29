@@ -1,0 +1,17 @@
+--- a/CMakeLists.txt	2026-08-15 09:13:28.257514451 +0000
++++ b/CMakeLists.txt	2026-08-15 09:21:12.986038274 +0000
+@@ -61,11 +61,11 @@
+ 
+ set(prefix                   ${DBUS_INSTALL_DIR})
+ set(exec_prefix              ${prefix})
+-set(DBUS_MACHINE_UUID_FILE   ${CMAKE_INSTALL_FULL_LOCALSTATEDIR}/lib/dbus/machine-id)
++set(DBUS_MACHINE_UUID_FILE   /var/lib/dbus/machine-id)
+ set(DBUS_BINDIR              ${CMAKE_INSTALL_FULL_BINDIR})
+ set(DBUS_DAEMONDIR           ${CMAKE_INSTALL_FULL_BINDIR})
+-set(DBUS_LOCALSTATEDIR       ${CMAKE_INSTALL_FULL_LOCALSTATEDIR})
+-set(DBUS_RUNSTATEDIR         ${CMAKE_INSTALL_FULL_RUNSTATEDIR})
++set(DBUS_LOCALSTATEDIR       /var)
++set(DBUS_RUNSTATEDIR         /run)
+ 
+ # On Windows this is relative to where we put the bus setup, in
+ # ${datadir}/dbus-1. For simplicity, we only do this if
