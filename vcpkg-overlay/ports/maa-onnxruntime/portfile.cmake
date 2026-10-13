@@ -101,16 +101,6 @@ endif()
 
 string(COMPARE EQUAL "${VCPKG_LIBRARY_LINKAGE}" "dynamic" BUILD_SHARED)
 
-set(ORT_RELEASE_OPTIONS)
-if(VCPKG_TARGET_IS_ANDROID)
-    # The non-legacy Android toolchain can shadow CMake's default Release flags.
-    # ORT #23688 removed its -O3 workaround and sets these flags in its own triplets.
-    list(APPEND ORT_RELEASE_OPTIONS
-        "-DCMAKE_C_FLAGS_RELEASE:STRING=-O3 -DNDEBUG"
-        "-DCMAKE_CXX_FLAGS_RELEASE:STRING=-O3 -DNDEBUG"
-    )
-endif()
-
 # see tools/ci_build/build.py
 vcpkg_cmake_configure(
     SOURCE_PATH "${SOURCE_PATH}/cmake"
@@ -143,8 +133,6 @@ vcpkg_cmake_configure(
         -Donnxruntime_ENABLE_TRAINING_OPS=OFF
         # some other customizations ...
         --compile-no-warning-as-error
-    OPTIONS_RELEASE
-        ${ORT_RELEASE_OPTIONS}
     OPTIONS_DEBUG
         -Donnxruntime_ENABLE_MEMLEAK_CHECKER=OFF
         -Donnxruntime_DEBUG_NODE_INPUTS_OUTPUTS=0
