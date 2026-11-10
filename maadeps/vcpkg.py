@@ -64,7 +64,7 @@ def install(*ports, triplet=None):
     cmd.extend(port + ":" + triplet for port in ports)
     subprocess.check_call(cmd, cwd=root)
 
-def install_manifest(manifest_root, triplet=None):
+def install_manifest(manifest_root, triplet=None, features=None):
     if triplet is None:
         triplet = _this_module.triplet
     cmd = [
@@ -76,9 +76,11 @@ def install_manifest(manifest_root, triplet=None):
         "--host-triplet",
         _get_host_triplet(triplet),
     ]
+    for feature in features or []:
+        cmd.append("--x-feature=" + feature)
     subprocess.check_call(cmd, cwd=manifest_root)
 
-def dry_run_manifest(manifest_root, output_file="vcpkg_dry_run.txt", triplet=None):
+def dry_run_manifest(manifest_root, output_file="vcpkg_dry_run.txt", triplet=None, features=None):
     if triplet is None:
         triplet = _this_module.triplet
     if not os.path.isabs(output_file):
@@ -96,6 +98,8 @@ def dry_run_manifest(manifest_root, output_file="vcpkg_dry_run.txt", triplet=Non
             _get_host_triplet(triplet),
             f"--x-write-nuget-packages-config={output_file}",
         ]
+        for feature in features or []:
+            cmd.append("--x-feature=" + feature)
         subprocess.check_call(cmd, cwd=manifest_root)
 
 def prune_archives():

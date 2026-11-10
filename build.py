@@ -18,14 +18,14 @@ def vcpkg_bootstrap():
 
 @task
 def vcpkg_install():
-    vcpkg.install_manifest(basedir)
+    vcpkg.install_manifest(basedir, features=["openvino"] if session.enable_openvino else None)
 
 def main():
     session.parse_args(sys.argv)
 
     vcpkg_bootstrap()
     if session.dry_run:
-        vcpkg.dry_run_manifest(basedir, "vcpkg_dry_run.txt")
+        vcpkg.dry_run_manifest(basedir, "vcpkg_dry_run.txt", features=["openvino"] if session.enable_openvino else None)
         return
 
     clean()

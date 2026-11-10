@@ -5,7 +5,7 @@ import shutil
 from .common import resdir
 
 exclude = [
-    "*onnxruntime_providers_shared*",
+    # Provider host must ship with the runtime: the OpenVINO EP loads it dynamically.
     "*opencv_img_hash*",
 ]
 

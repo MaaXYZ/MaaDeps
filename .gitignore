@@ -6,3 +6,8 @@ x-tools
 
 __pycache__
 vcpkg_dry_run.txt
+
+# OpenVINO pack build outputs
+openvino-pack/dist/
+openvino-pack/ci/
+openvino-pack/*.log
