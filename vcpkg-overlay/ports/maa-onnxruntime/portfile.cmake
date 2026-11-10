@@ -17,6 +17,7 @@ vcpkg_from_github(
         fix-cmake-cuda.patch
         # fix-cmake-mlas.patch  # dropped due to no usage
         fix-webgpu.patch
+        fix-providers-shared-name.patch
 )
 
 find_program(PROTOC NAMES protoc PATHS "${CURRENT_HOST_INSTALLED_DIR}/tools/protobuf" REQUIRED NO_DEFAULT_PATH NO_CMAKE_PATH)
@@ -71,6 +72,15 @@ vcpkg_check_features(OUT_FEATURE_OPTIONS FEATURE_OPTIONS
         webgpu    onnxruntime_BUILD_DAWN_SHARED_LIBRARY
 )
 
+# Build the OpenVINO EP with both Intel devices exposed; the device is selected
+# per session through the provider option "device_type".
+if("openvino" IN_LIST FEATURES)
+    list(APPEND FEATURE_OPTIONS
+        "-Donnxruntime_USE_OPENVINO_CPU=ON"
+        "-Donnxruntime_USE_OPENVINO_NPU=ON"
+    )
+endif()
+
 if("cuda" IN_LIST FEATURES)
     vcpkg_find_cuda(OUT_CUDA_TOOLKIT_ROOT cuda_toolkit_root)
     list(APPEND FEATURE_OPTIONS
@@ -101,6 +111,14 @@ endif()
 
 string(COMPARE EQUAL "${VCPKG_LIBRARY_LINKAGE}" "dynamic" BUILD_SHARED)
 
+# ORT 1.29 的 OpenVINO provider 在 DISABLE_SPARSE_TENSORS 下仍引用
+# DataTypeImpl::IsSparseTensorType，必须保留稀疏张量支持才能编译
+if("openvino" IN_LIST FEATURES)
+    set(ORT_SPARSE_TENSORS_OPTION "-Donnxruntime_DISABLE_SPARSE_TENSORS=OFF")
+else()
+    set(ORT_SPARSE_TENSORS_OPTION "-Donnxruntime_DISABLE_SPARSE_TENSORS=ON")
+endif()
+
 # see tools/ci_build/build.py
 vcpkg_cmake_configure(
     SOURCE_PATH "${SOURCE_PATH}/cmake"
@@ -127,7 +145,7 @@ vcpkg_cmake_configure(
         -Donnxruntime_DISABLE_ABSEIL=OFF
         # 裁剪无用算子与模板实例化 (Maa 仅需视觉/神经网络模型，不需传统机器学习算子与稀疏/FP8类型)
         -Donnxruntime_DISABLE_ML_OPS=ON
-        -Donnxruntime_DISABLE_SPARSE_TENSORS=ON
+        ${ORT_SPARSE_TENSORS_OPTION}
         -Donnxruntime_DISABLE_FLOAT8_TYPES=ON
         -Donnxruntime_BUILD_OPSCHEMA_LIB=OFF
         -Donnxruntime_ENABLE_TRAINING_OPS=OFF

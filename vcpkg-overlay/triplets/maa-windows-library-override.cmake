@@ -23,6 +23,17 @@ if(PORT MATCHES "^opencv")
   )
 endif()
 
+if(PORT STREQUAL "openvino")
+  # OpenVINO 静态链接进 ORT provider 时 DllMain 初始化失败 (Win32 1114)，
+  # 与官方发行版保持一致改为动态库
+  set(VCPKG_LIBRARY_LINKAGE dynamic)
+endif()
+
+if(PORT STREQUAL "tbb")
+  # 与官方 OpenVINO 一致：动态 TBB，避免 OpenVINO 核心与 NPU 插件各自静态链接一份 TBB 导致崩溃
+  set(VCPKG_LIBRARY_LINKAGE dynamic)
+endif()
+
 if(PORT STREQUAL "maa-onnxruntime")
   set(VCPKG_LIBRARY_LINKAGE dynamic)
 endif()
@@ -31,10 +42,14 @@ if(PORT STREQUAL "maa-fastdeploy")
   set(VCPKG_LIBRARY_LINKAGE dynamic)
 endif()
 
-set(VCPKG_CMAKE_CONFIGURE_OPTIONS
-  ${VCPKG_CMAKE_CONFIGURE_OPTIONS}
-  -DCMAKE_SHARED_LIBRARY_SUFFIX_CXX=_maa.dll
-)
+if(PORT STREQUAL "openvino" OR PORT STREQUAL "tbb")
+  # OpenVINO 内部组件（前端、NPU compiler）按固定名 tbb12.dll / openvino*.dll 相互依赖，必须保持默认库名
+else()
+  set(VCPKG_CMAKE_CONFIGURE_OPTIONS
+    ${VCPKG_CMAKE_CONFIGURE_OPTIONS}
+    -DCMAKE_SHARED_LIBRARY_SUFFIX_CXX=_maa.dll
+  )
+endif()
 
 string(APPEND VCPKG_CXX_FLAGS " /Zc:inline")
 string(APPEND VCPKG_C_FLAGS " /Zc:inline")

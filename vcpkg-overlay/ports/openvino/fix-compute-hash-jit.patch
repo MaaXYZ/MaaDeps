@@ -1,0 +1,17 @@
+diff --git a/src/core/src/runtime/compute_hash.cpp b/src/core/src/runtime/compute_hash.cpp
+index 291cabb..a801dda 100644
+--- a/src/core/src/runtime/compute_hash.cpp
++++ b/src/core/src/runtime/compute_hash.cpp
+@@ -14,9 +14,9 @@
+ 
+ #include "openvino/core/visibility.hpp"
+ 
+-#if !defined(OS_CHROMEOS) && (defined(OPENVINO_ARCH_X86) || defined(OPENVINO_ARCH_X86_64))
+-#    define OV_CORE_USE_XBYAK_JIT
+-#endif
++// Disable the xbyak JIT hash kernel: with the xbyak version provided by vcpkg
++// the generated kernel crashes with a null-pointer access; the scalar path
++// below produces identical hashes.
+ 
+ #ifdef OV_CORE_USE_XBYAK_JIT
+ #    include "openvino/core/parallel.hpp"

@@ -1,0 +1,23 @@
+diff --git a/cmake/onnxruntime_providers_cpu.cmake b/cmake/onnxruntime_providers_cpu.cmake
+--- a/cmake/onnxruntime_providers_cpu.cmake
++++ b/cmake/onnxruntime_providers_cpu.cmake
+@@ -207,5 +207,9 @@
+   source_group(TREE ${ONNXRUNTIME_ROOT}/core FILES ${onnxruntime_providers_shared_cc_srcs})
+   onnxruntime_add_shared_library(onnxruntime_providers_shared ${onnxruntime_providers_shared_cc_srcs} "${ONNXRUNTIME_ROOT}/core/dll/onnxruntime.rc")
++  # The vcpkg triplet appends _maa.dll to shared libraries, but onnxruntime hardcodes
++  # "onnxruntime_providers_shared.dll" when loading the provider host, so keep the
++  # original name or the provider never receives Provider_SetHost.
++  set_target_properties(onnxruntime_providers_shared PROPERTIES SUFFIX "${CMAKE_SHARED_LIBRARY_SUFFIX}")
+   set_target_properties(onnxruntime_providers_shared PROPERTIES FOLDER "ONNXRuntime")
+   set_target_properties(onnxruntime_providers_shared PROPERTIES LINKER_LANGUAGE CXX)
+   #ON AIX, to call dlopen on onnxruntime_providers_shared, we need to generate this library as shared object .so file.
+diff --git a/cmake/onnxruntime_providers_openvino.cmake b/cmake/onnxruntime_providers_openvino.cmake
+--- a/cmake/onnxruntime_providers_openvino.cmake
++++ b/cmake/onnxruntime_providers_openvino.cmake
+@@ -44,3 +44,5 @@
+   set_target_properties(onnxruntime_providers_openvino PROPERTIES CXX_STANDARD 20)
+   set_target_properties(onnxruntime_providers_openvino PROPERTIES LINKER_LANGUAGE CXX)
++  # onnxruntime loads the provider by its fixed file name; drop the _maa suffix.
++  set_target_properties(onnxruntime_providers_openvino PROPERTIES SUFFIX "${CMAKE_SHARED_LIBRARY_SUFFIX}")
+   set_target_properties(onnxruntime_providers_openvino PROPERTIES FOLDER "ONNXRuntime")
+ 
